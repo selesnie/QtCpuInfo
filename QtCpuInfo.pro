@@ -34,3 +34,5 @@ HEADERS += \
     FileReader.hpp \
     CpuDataModel.hpp \
     CpuCore.hpp
+
+DISTFILES +=
