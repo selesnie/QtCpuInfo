@@ -17,19 +17,19 @@ int main(int argc, char ** argv)
 
     QGuiApplication app(argc, argv);
 
-    FileReader data;
-    QVector<CpuCore> vec = data.readAndParseFile();
+    FileReader fileReader;
+    QVector<CpuCore> cpuCoreVec = fileReader.readAndParseFile();
 
-    CpuDataModel model;
+    CpuDataModel cpuDataModel;
 
-    for (const auto& item : vec)
+    for (const auto& cpuCore : cpuCoreVec)
     {
-        model.addCpuCore(item);
+        cpuDataModel.addCpuCore(cpuCore);
     }
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("myModel",
-                                             &model);
+    engine.rootContext()->setContextProperty("cpuDataModel",
+                                             &cpuDataModel);
 
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 

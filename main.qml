@@ -1,57 +1,68 @@
-import QtQuick 2.7
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
+import QtQuick 2.4
+import QtQuick.Window 2.2
+import QtQuick.Controls.Styles 1.4
+import QtQuick.Extras 1.4
 
-ApplicationWindow {
+Window {
+    id: window
     visible: true
-    width: 640
-    height: 480
-    title: qsTr("Work in progress")
+    width: 400
+    height: 800
+    title: qsTr("Cool stuff")
 
-    SwipeView {
-        id: swipeView
-        anchors.fill: parent
-        currentIndex: tabBar.currentIndex
+    Rectangle {
+        width: window.width; height: window.height
 
-        ListView {
-            width: 100; height: 100
+        GridView {
+            id: grid
+            verticalLayoutDirection: GridView.TopToBottom
+            cellWidth: 200
+            cellHeight: 200
+            anchors.fill: parent
+            model: cpuDataModel
+            delegate:
+                Rectangle {
+                width: grid.cellWidth
+                height: grid.cellHeight
+                color: "#494d53"
 
-            model: myModel
-            delegate: Rectangle {
-                height: 25
-                width: 100
+                CircularGauge {
+                    id: gauge
+                    anchors.fill: parent
+                    style: CircularGaugeStyle {
+                        needle: Rectangle {
+                            y: outerRadius * 0.15
+                            implicitWidth: outerRadius * 0.03
+                            implicitHeight: outerRadius * 0.9
+                            antialiasing: true
+                            color: Qt.rgba(0.66, 0.3, 0, 1)
+                        }
+                        foreground: Item {
+                            Rectangle {
+                                width: outerRadius * 0.2
+                                height: width
+                                radius: width / 2
+                                color: "#e5e5e5"
+                                anchors.centerIn: parent
+                            }
+                        }
+                        tickmark: Rectangle {
+                            visible: styleData.value < 80 || styleData.value % 10 == 0
+                            implicitWidth: outerRadius * 0.02
+                            antialiasing: true
+                            implicitHeight: outerRadius * 0.06
+                            color: styleData.value >= 80 ? "#e34c22" : "#e5e5e5"
+                        }
+                    }
 
-                Text {
-                    text: {
-                        var text = "CPU id: " + processor;
-                        text += ", vendor: " + vendor;
-                        text += ", model: " + model;
-                        text += ", freq: " + clockFreqMhz;
-                        return text;
+                    Text {
+                        color: "white"
+                        text: {
+                            return "CPU #" + processor + ": " + clockFreqMhz;
+                        }
                     }
                 }
             }
-        }
-
-        Page1 {
-        }
-
-        Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
-            }
-        }
-    }
-
-    footer: TabBar {
-        id: tabBar
-        currentIndex: swipeView.currentIndex
-        TabButton {
-            text: qsTr("First")
-        }
-        TabButton {
-            text: qsTr("Second")
         }
     }
 }
