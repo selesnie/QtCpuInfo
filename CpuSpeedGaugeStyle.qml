@@ -2,9 +2,9 @@ import QtQuick 2.4
 import QtQuick.Controls.Styles 1.4
 
 CircularGaugeStyle {
-    tickmarkStepSize: 1000
+    tickmarkStepSize: 400
     tickmark: Rectangle {
-        visible: styleData.value < 2400 || styleData.value % 10 == 0
+//        visible: styleData.value < 2400 || styleData.value % 10 == 0
         implicitWidth: outerRadius * 0.02
         antialiasing: true
         implicitHeight: outerRadius * 0.06
@@ -12,11 +12,11 @@ CircularGaugeStyle {
     }
 
     minorTickmark: Rectangle {
-        visible: styleData.value < 2400
+//        visible: styleData.value < 2400
         implicitWidth: outerRadius * 0.01
         antialiasing: true
         implicitHeight: outerRadius * 0.03
-        color: "#e5e5e5"
+        color: styleData.value >= 2400 ? "#e34c22" : "#e5e5e5"
     }
 
     tickmarkLabel:  Text {
@@ -85,9 +85,9 @@ CircularGaugeStyle {
 
     background: Canvas {
         onPaint: {
-            var ctx = getContext("2d");
-            ctx.reset();
-            paintBackground(ctx);
+//            var ctx = getContext("2d");
+//            ctx.reset();
+//            paintBackground(ctx);
         }
 
         Text {
@@ -102,12 +102,25 @@ CircularGaugeStyle {
 
             readonly property int mhzInt: control.value
         }
+
         Text {
+            id: speedLabel
             text: "MHz"
             color: "white"
             font.pixelSize: toPixels(0.09)
             anchors.top: speedText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Text {
+            id: cpuIdText
+            font.pixelSize: toPixels(0.1)
+            text: "CPU"
+            color: "white"
+            horizontalAlignment: Text.AlignRight
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: speedLabel.bottom
+            anchors.topMargin: toPixels(0.1)
         }
     }
 

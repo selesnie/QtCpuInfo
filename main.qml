@@ -10,6 +10,7 @@ Window {
     height: 800
     title: qsTr("Cool stuff")
 
+    color: "black"
     DataSource {
         id: dataSource
     }
@@ -17,6 +18,7 @@ Window {
     Rectangle {
         width: window.width; height: window.height
 
+        color: "black"
         GridView {
             id: grid
             verticalLayoutDirection: GridView.TopToBottom
@@ -28,7 +30,7 @@ Window {
                 Rectangle {
                 width: grid.cellWidth
                 height: grid.cellHeight
-                color: "#494d53"
+                color: "black"
 
                 CircularGauge {
                     id: speedometer
