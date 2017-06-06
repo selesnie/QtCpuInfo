@@ -1,17 +1,33 @@
-import QtQuick 2.2
+import QtQuick 2.4
 import QtQuick.Controls.Styles 1.4
 
 CircularGaugeStyle {
+    tickmark: Rectangle {
+        visible: styleData.value < 2400 || styleData.value % 10 == 0
+        implicitWidth: outerRadius * 0.02
+        antialiasing: true
+        implicitHeight: outerRadius * 0.06
+        color: styleData.value >= 2400 ? "#e34c22" : "#e5e5e5"
+    }
+
     minorTickmark: Rectangle {
-        visible: true
+        visible: styleData.value < 2400
         implicitWidth: outerRadius * 0.01
         antialiasing: true
         implicitHeight: outerRadius * 0.03
-        color: "silver"
+        color: "#e5e5e5"
+    }
+
+    tickmarkLabel:  Text {
+        font.pixelSize: Math.max(6, outerRadius * 0.1)
+        text: styleData.value
+        color: styleData.value >= 2400 ? "#e34c22" : "#e5e5e5"
+        antialiasing: true
     }
 
     tickmarkInset: toPixels(0.04)
-    //    minorTickmarkInset: tickmarkInset
+//    minorTickmarkCount: 5
+//    minorTickmarkInset: tickmarkInset
     labelStepSize: 400
     labelInset: toPixels(0.23)
 
@@ -107,6 +123,7 @@ CircularGaugeStyle {
             var ctx = getContext("2d");
             ctx.reset();
 
+            //Draw needle's top side
             ctx.beginPath();
             ctx.moveTo(xCenter, height);
             ctx.lineTo(xCenter - needleBaseWidth / 2, height - needleBaseWidth / 2);
@@ -114,16 +131,17 @@ CircularGaugeStyle {
             ctx.lineTo(xCenter, yCenter - needleLength);
             ctx.lineTo(xCenter, 0);
             ctx.closePath();
-            ctx.fillStyle = Qt.rgba(0.66, 0, 0, 0.66);
+            ctx.fillStyle = Qt.lighter(Qt.rgba(247, 247, 247, 0.6));
             ctx.fill();
 
+            //Draw needle's bottom side
             ctx.beginPath();
             ctx.moveTo(xCenter, height)
             ctx.lineTo(width, height - needleBaseWidth / 2);
             ctx.lineTo(xCenter + needleTipWidth / 2, 0);
             ctx.lineTo(xCenter, 0);
             ctx.closePath();
-            ctx.fillStyle = Qt.lighter(Qt.rgba(0.66, 0, 0, 0.66));
+            ctx.fillStyle = Qt.lighter(Qt.rgba(229, 229, 229, 0.8));
             ctx.fill();
         }
     }

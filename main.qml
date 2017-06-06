@@ -32,20 +32,13 @@ Window {
 
                 CircularGauge {
                     id: speedometer
-                    value: dataSource.mhz
+                    value: clockFreqMhz;
                     anchors.verticalCenter: parent.verticalCenter
                     maximumValue: 4000
                     width: height
                     height: parent.height
 
                     style: CpuSpeedGaugeStyle {}
-
-                    Text {
-                        color: "white"
-                        text: {
-                            return "CPU #" + processor + ": " + clockFreqMhz;
-                        }
-                    }
                 }
             }
         }

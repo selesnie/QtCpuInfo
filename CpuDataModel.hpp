@@ -18,9 +18,11 @@ public:
 
     CpuDataModel(QObject *parent = 0);
 
-    void addCpuCore(const CpuCore &CpuCore);
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
+
+    void addToModel(const CpuCore &CpuCore);
+    void clearModel();
 
 protected:
     QHash<int, QByteArray> roleNames() const override;

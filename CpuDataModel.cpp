@@ -5,11 +5,16 @@ CpuDataModel::CpuDataModel(QObject *parent)
 {
 }
 
-void CpuDataModel::addCpuCore(const CpuCore &CpuCore)
+void CpuDataModel::addToModel(const CpuCore &CpuCore)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_cpuCores << CpuCore;
     endInsertRows();
+}
+
+void CpuDataModel::clearModel()
+{
+    m_cpuCores.clear();
 }
 
 int CpuDataModel::rowCount(const QModelIndex & parent) const
