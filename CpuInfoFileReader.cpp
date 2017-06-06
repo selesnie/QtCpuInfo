@@ -1,14 +1,13 @@
-#include "FileReader.hpp"
+#include "CpuInfoFileReader.hpp"
 
-#include <QDir>
+#include <QFile>
 #include <QTextStream>
 
-FileReader::FileReader(QObject *parent)
-    : QObject(parent)
+CpuInfoFileReader::CpuInfoFileReader()
 {
 }
 
-QVector<CpuCore> FileReader::readAndParseFile() const
+QVector<CpuCore> CpuInfoFileReader::readAndParse() const
 {
     QFile cpuInfoFile("/proc/cpuinfo");
 

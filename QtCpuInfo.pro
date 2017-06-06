@@ -3,8 +3,9 @@ QT += qml quick
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    FileReader.cpp \
-    CpuDataModel.cpp
+    CpuInfoFileReader.cpp \
+    TimerCallback.cpp \
+    CpuInfoDataModel.cpp
 
 RESOURCES += qml.qrc
 
@@ -31,8 +32,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    FileReader.hpp \
-    CpuDataModel.hpp \
-    CpuCore.hpp
+    CpuCore.hpp \
+    TimerCallback.hpp \
+    CpuInfoFileReader.hpp \
+    CpuInfoDataModel.hpp
 
 DISTFILES +=

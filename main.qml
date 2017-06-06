@@ -23,7 +23,7 @@ Window {
             cellWidth: 200
             cellHeight: 200
             anchors.fill: parent
-            model: cpuDataModel
+            model: cpuInfoDataModel
             delegate:
                 Rectangle {
                 width: grid.cellWidth
@@ -32,20 +32,13 @@ Window {
 
                 CircularGauge {
                     id: speedometer
-                    value: dataSource.mhz
+                    value: clockFreqMhz;
                     anchors.verticalCenter: parent.verticalCenter
                     maximumValue: 4000
                     width: height
                     height: parent.height
 
                     style: CpuSpeedGaugeStyle {}
-
-                    Text {
-                        color: "white"
-                        text: {
-                            return "CPU #" + processor + ": " + clockFreqMhz;
-                        }
-                    }
                 }
             }
         }
