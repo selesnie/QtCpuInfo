@@ -6,21 +6,24 @@ import QtQuick.Extras 1.4
 Window {
     id: window
     visible: true
-    width: 1024
-    height: 768
+    color: "black"
+    width: 1280
+    height: 800
     title: qsTr("Qt CPU info")
 
     Rectangle {
         color: "black"
         width: window.width; height: window.height
+        anchors.top: window.top
         anchors.bottom: window.bottom
         anchors.horizontalCenter: window.horizontalCenter
+        anchors.fill: parent
 
         GridView {
             id: grid
             verticalLayoutDirection: GridView.TopToBottom
-            cellWidth: 400
-            cellHeight: 250
+            cellWidth: (window.width-40)/4
+            cellHeight: (window.height-40)/4
             anchors.leftMargin: 20
             anchors.rightMargin: anchors.leftMargin
             anchors.topMargin: anchors.leftMargin
@@ -34,33 +37,37 @@ Window {
                 color: "black"
 
                 CircularGauge {
-                    id: speedometer
+                    id: cpuSpeedometer
                     value: clockFreqMhz;
+                    anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
+                    anchors.fill: parent
                     maximumValue: 4000
-                    width: height
+                    width: parent.width
                     height: parent.height
 
                     style: CpuSpeedGaugeStyle {}
                 }
 
-                Rectangle {
-                    id: detailsInfoArea
-                    color: "transparent"
-                    border.color: "blue"
-                    width: 50
-                    height: 50
-
-                    Text {
-                        id: name
-                        color: "white"
-                        text: {
-                            var text = model + "\n" +
-                                    "CPU " + processor;
-                            return text;
-                        }
+                Text {
+                    id: name
+                    color: "white"
+                    anchors.fill: parent
+                    text: {
+                        var text = model + "\n" +
+                                "CPU " + processor;
+                        return text;
                     }
                 }
+
+//                Rectangle {
+//                    anchors.fill: parent
+//                    id: debugInfoArea
+//                    color: "transparent"
+//                    border.color: "blue"
+//                    width: 50
+//                    height: 50
+//                }
             }
         }
     }

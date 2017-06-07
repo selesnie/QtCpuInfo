@@ -10,6 +10,7 @@ CpuInfoFileReader::CpuInfoFileReader()
 QVector<CpuCore> CpuInfoFileReader::readAndParse() const
 {
     QFile cpuInfoFile("/proc/cpuinfo");
+//    QFile cpuInfoFile("../QtCpuInfo/testdata.txt");
 
     if (!cpuInfoFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
