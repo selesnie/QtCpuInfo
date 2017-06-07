@@ -1,7 +1,7 @@
 # QtCpuInfo
 QtCpuInfo reads /proc/cpuinfo file in Linux and shows its contents on QML UI
 
-# Installation
+## Installation
 
 Download and install Qt Creator in Linux
 
