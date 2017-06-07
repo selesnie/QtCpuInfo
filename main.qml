@@ -6,24 +6,21 @@ import QtQuick.Extras 1.4
 Window {
     id: window
     visible: true
-    width: 640
-    height: 480
+    width: 1024
+    height: 768
     title: qsTr("Qt CPU info")
 
-    color: "black"
-    DataSource {
-        id: dataSource
-    }
-
     Rectangle {
-        width: window.width; height: window.height
-
         color: "black"
+        width: window.width; height: window.height
+        anchors.bottom: window.bottom
+        anchors.horizontalCenter: window.horizontalCenter
+
         GridView {
             id: grid
             verticalLayoutDirection: GridView.TopToBottom
-            cellWidth: 150
-            cellHeight: 150
+            cellWidth: 400
+            cellHeight: 250
             anchors.leftMargin: 20
             anchors.rightMargin: anchors.leftMargin
             anchors.topMargin: anchors.leftMargin
@@ -32,8 +29,8 @@ Window {
             model: cpuInfoDataModel
             delegate:
                 Rectangle {
-                width: grid.cellWidth/1.1
-                height: grid.cellHeight/1.1
+                width: grid.cellWidth
+                height: grid.cellHeight
                 color: "black"
 
                 CircularGauge {
@@ -47,21 +44,21 @@ Window {
                     style: CpuSpeedGaugeStyle {}
                 }
 
-                Text {
-                    id: cpuModel
-                    anchors.top: parent.bottom
-                    color: "white"
-                    text: {
-                        return model;
-                    }
-                }
+                Rectangle {
+                    id: detailsInfoArea
+                    color: "transparent"
+                    border.color: "blue"
+                    width: 50
+                    height: 50
 
-                Text {
-                    id: cpuId
-                    anchors.top: parent.top
-                    color: "white"
-                    text: {
-                        return "CPU" + processor;
+                    Text {
+                        id: name
+                        color: "white"
+                        text: {
+                            var text = model + "\n" +
+                                    "CPU " + processor;
+                            return text;
+                        }
                     }
                 }
             }
