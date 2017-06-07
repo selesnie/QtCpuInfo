@@ -107,20 +107,9 @@ CircularGaugeStyle {
             id: speedLabel
             text: "MHz"
             color: "white"
-            font.pixelSize: toPixels(0.09)
+            font.pixelSize: toPixels(0.15)
             anchors.top: speedText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Text {
-            id: cpuIdText
-            font.pixelSize: toPixels(0.1)
-            text: "CPU"
-            color: "white"
-            horizontalAlignment: Text.AlignRight
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: speedLabel.bottom
-            anchors.topMargin: toPixels(0.1)
         }
     }
 

@@ -6,9 +6,9 @@ import QtQuick.Extras 1.4
 Window {
     id: window
     visible: true
-    width: 400
-    height: 800
-    title: qsTr("Cool stuff")
+    width: 640
+    height: 480
+    title: qsTr("Qt CPU info")
 
     color: "black"
     DataSource {
@@ -22,14 +22,18 @@ Window {
         GridView {
             id: grid
             verticalLayoutDirection: GridView.TopToBottom
-            cellWidth: 200
-            cellHeight: 200
+            cellWidth: 150
+            cellHeight: 150
+            anchors.leftMargin: 20
+            anchors.rightMargin: anchors.leftMargin
+            anchors.topMargin: anchors.leftMargin
+            anchors.bottomMargin: anchors.leftMargin
             anchors.fill: parent
             model: cpuInfoDataModel
             delegate:
                 Rectangle {
-                width: grid.cellWidth
-                height: grid.cellHeight
+                width: grid.cellWidth/1.1
+                height: grid.cellHeight/1.1
                 color: "black"
 
                 CircularGauge {
@@ -41,6 +45,24 @@ Window {
                     height: parent.height
 
                     style: CpuSpeedGaugeStyle {}
+                }
+
+                Text {
+                    id: cpuModel
+                    anchors.top: parent.bottom
+                    color: "white"
+                    text: {
+                        return model;
+                    }
+                }
+
+                Text {
+                    id: cpuId
+                    anchors.top: parent.top
+                    color: "white"
+                    text: {
+                        return "CPU" + processor;
+                    }
                 }
             }
         }
