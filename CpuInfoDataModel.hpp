@@ -29,10 +29,11 @@ public:
     };
 
     /**
-     * @brief CpuInfoDataModel Default ctor
-     * @param parent Pointer to parent object
+     * @brief CpuInfoDataModel Ctor
+     * @param filename Input filename for model data
+     * @param parent Parent object
      */
-    explicit CpuInfoDataModel(QObject *parent = 0);
+    explicit CpuInfoDataModel(const QString& filename, QObject *parent = 0);
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
@@ -59,6 +60,7 @@ private:
     void addFileContentsToDataModel();
 
     QList<CpuCore> m_cpuCores;
+    QString m_filename;
     TimerCallback m_timerCallback;
 };
 

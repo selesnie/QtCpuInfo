@@ -6,8 +6,9 @@ namespace {
 constexpr auto TIMER_INTERVAL_MILLISECONDS = 2000;
 }
 
-CpuInfoDataModel::CpuInfoDataModel(QObject *parent)
+CpuInfoDataModel::CpuInfoDataModel(const QString& filename, QObject *parent)
     : QAbstractListModel(parent),
+      m_filename(filename),
       m_timerCallback()
 {
     addFileContentsToDataModel();
@@ -81,7 +82,7 @@ QHash<int, QByteArray> CpuInfoDataModel::roleNames() const
 
 void CpuInfoDataModel::addFileContentsToDataModel()
 {
-    CpuInfoFileReader cpuInfoFileReader;
+    CpuInfoFileReader cpuInfoFileReader(m_filename);
     QVector<CpuCore> cpuCoreVec = cpuInfoFileReader.readAndParse();
 
     for (const auto& cpuCore : cpuCoreVec)

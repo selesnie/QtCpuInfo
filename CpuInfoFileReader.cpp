@@ -3,14 +3,14 @@
 #include <QFile>
 #include <QTextStream>
 
-CpuInfoFileReader::CpuInfoFileReader()
+CpuInfoFileReader::CpuInfoFileReader(const QString& filename)
+    : m_filename(filename)
 {
 }
 
 QVector<CpuCore> CpuInfoFileReader::readAndParse() const
 {
-    QFile cpuInfoFile("/proc/cpuinfo");
-//    QFile cpuInfoFile("../QtCpuInfo/testdata.txt");
+    QFile cpuInfoFile(m_filename);
 
     if (!cpuInfoFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {

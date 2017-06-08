@@ -12,13 +12,20 @@
 class CpuInfoFileReader
 {
 public:
-    CpuInfoFileReader();
+    /**
+     * @brief CpuInfoFileReader Ctor
+     * @param filename Input filename for reader
+     */
+    CpuInfoFileReader(const QString& filename);
 
     /**
      * @brief readAndParse Reads and parses contents of file
      * @return Returns vector of CpuCore data structs
      */
     QVector<CpuCore> readAndParse() const;
+
+private:
+    QString m_filename;
 };
 
 #endif
