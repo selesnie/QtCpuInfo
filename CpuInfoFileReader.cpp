@@ -29,22 +29,26 @@ QVector<CpuCore> CpuInfoFileReader::readAndParse() const
         {
             cpuCore = CpuCore();
             cpuCore.processor = line.split(':').last();
+            cpuCore.processor.trimmed();
         }
         else
         {
             if (line.contains("vendor_id"))
             {
                 cpuCore.vendor = line.split(':').last();
+                cpuCore.vendor.trimmed();
             }
 
             if (line.contains("model name"))
             {
                 cpuCore.model = line.split(':').last();
+                cpuCore.model.trimmed();
             }
 
             if (line.contains("cpu MHz"))
             {
                 cpuCore.clockFreqMhz = line.split(':').last();
+                cpuCore.clockFreqMhz.trimmed();
                 cpuCoreVec.push_back(cpuCore);
             }
         }
