@@ -21,10 +21,10 @@ CpuInfoDataModel::CpuInfoDataModel(QObject *parent)
     m_timerCallback.start(TIMER_INTERVAL_MILLISECONDS);
 }
 
-void CpuInfoDataModel::addToDataModel(const CpuCore &CpuCore)
+void CpuInfoDataModel::addToDataModel(const CpuCore &cpuCore)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    m_cpuCores << CpuCore;
+    m_cpuCores << cpuCore;
     endInsertRows();
 }
 

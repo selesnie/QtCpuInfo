@@ -14,6 +14,10 @@ class CpuInfoFileReader
 public:
     CpuInfoFileReader();
 
+    /**
+     * @brief readAndParse Reads and parses contents of file
+     * @return Vector of CpuCore data structs
+     */
     QVector<CpuCore> readAndParse() const;
 };
 

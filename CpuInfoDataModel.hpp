@@ -6,6 +6,12 @@
 
 #include <QAbstractListModel>
 
+/**
+ * @brief The CpuInfoDataModel class is the data model
+ * that encapsulates model in the model-view
+ * architecture. When model's data is changed it
+ * notifies view to update its data.
+ */
 class CpuInfoDataModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -23,13 +29,24 @@ public:
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
 
-    void addToDataModel(const CpuCore &CpuCore);
+    /**
+     * @brief addToDataModel Adds data to model
+     * @param CpuCore Data added to model
+     */
+    void addToDataModel(const CpuCore &cpuCore);
+
+    /**
+     * @brief resetDataModel Resets data model. Model data is cleared.
+     */
     void resetDataModel();
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
+    /**
+     * @brief addFileContentsToDataModel Adds contents of file into data model
+     */
     void addFileContentsToDataModel();
 
     QList<CpuCore> m_cpuCores;
