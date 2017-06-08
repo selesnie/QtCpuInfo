@@ -8,14 +8,18 @@
 
 /**
  * @brief The CpuInfoDataModel class is the data model
- * that encapsulates model in the model-view
- * architecture. When model's data is changed it
- * notifies view to update its data.
+ * that encapsulates model part in the model-view
+ * architecture. When model data is changed it
+ * notifies a view part to update its data.
  */
 class CpuInfoDataModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
+    /**
+     * @brief The ProcessorRoles enum presents
+     * data roles in the model
+     */
     enum ProcessorRoles
     {
         ProcessorIdRole = Qt::UserRole + 1,
@@ -24,6 +28,10 @@ public:
         ClockFreqRole
     };
 
+    /**
+     * @brief CpuInfoDataModel Default ctor
+     * @param parent Pointer to parent object
+     */
     explicit CpuInfoDataModel(QObject *parent = 0);
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
@@ -31,12 +39,13 @@ public:
 
     /**
      * @brief addToDataModel Adds data to model
-     * @param CpuCore Data added to model
+     * @param Constant reference to data to be added in model
      */
     void addToDataModel(const CpuCore &cpuCore);
 
     /**
-     * @brief resetDataModel Resets data model. Model data is cleared.
+     * @brief resetDataModel Resets data model.
+     * All data items in model are deleted.
      */
     void resetDataModel();
 
@@ -45,7 +54,7 @@ protected:
 
 private:
     /**
-     * @brief addFileContentsToDataModel Adds contents of file into data model
+     * @brief addFileContentsToDataModel Adds file contents to data model
      */
     void addFileContentsToDataModel();
 

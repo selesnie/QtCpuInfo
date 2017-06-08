@@ -14,9 +14,11 @@ QVector<CpuCore> CpuInfoFileReader::readAndParse() const
 
     if (!cpuInfoFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
+        //Throw exception and terminate application if file cannot be opened.
         throw std::runtime_error("Error opening " + cpuInfoFile.fileName().toLatin1());
     }
 
+    //Read and parse file line by line
     QTextStream inputFileStream(&cpuInfoFile);
     QString line = inputFileStream.readLine();
 
@@ -49,10 +51,13 @@ QVector<CpuCore> CpuInfoFileReader::readAndParse() const
             {
                 cpuCore.clockFreqMhz = line.split(':').last();
                 cpuCore.clockFreqMhz.trimmed();
+                //This is last item we are interested in.
+                //Add cpuCore in the vector
                 cpuCoreVec.push_back(cpuCore);
             }
         }
 
+        //Read next line
         line = inputFileStream.readLine();
     }
 

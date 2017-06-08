@@ -12,6 +12,8 @@ CpuInfoDataModel::CpuInfoDataModel(QObject *parent)
 {
     addFileContentsToDataModel();
 
+    //Register timer callback function that is called
+    //when timer elapses
     m_timerCallback.registerTimerElapsedCallback([this]()
     {
         resetDataModel();

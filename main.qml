@@ -45,7 +45,7 @@ Window {
                     maximumValue: 4000
                     width: parent.width
                     height: parent.height
-                    anchors.leftMargin: 110
+                    anchors.leftMargin: 150
 
                     style: CpuSpeedGaugeStyle {}
                 }

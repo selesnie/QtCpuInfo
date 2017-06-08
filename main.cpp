@@ -14,6 +14,7 @@ int main(int argc, char ** argv)
     QQmlApplicationEngine engine;
     CpuInfoDataModel cpuInfoDataModel;
 
+    //Register data model object to QML UI
     engine.rootContext()->setContextProperty("cpuInfoDataModel",
                                              &cpuInfoDataModel);
 

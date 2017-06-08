@@ -16,7 +16,7 @@ public:
 
     /**
      * @brief readAndParse Reads and parses contents of file
-     * @return Vector of CpuCore data structs
+     * @return Returns vector of CpuCore data structs
      */
     QVector<CpuCore> readAndParse() const;
 };

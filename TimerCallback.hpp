@@ -37,6 +37,7 @@ private slots:
 
 private:
     QTimer m_timer;
+    //Callback function that is called after timer elapses
     std::function<void()> m_callback;
 };
 
