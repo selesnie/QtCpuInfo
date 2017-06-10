@@ -17,25 +17,50 @@ CpuInfoDataModel::CpuInfoDataModel(const QString& filename, QObject *parent)
     //when timer elapses
     m_timerCallback.registerTimerElapsedCallback([this]()
     {
-        resetDataModel();
         addFileContentsToDataModel();
     });
 
     m_timerCallback.start(TIMER_INTERVAL_MILLISECONDS);
 }
 
-void CpuInfoDataModel::addToDataModel(const CpuCore &cpuCore)
+void CpuInfoDataModel::addDataToModel(const QVector<CpuCore>& cpuCoreVec)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    m_cpuCores << cpuCore;
+
+    for (const auto& cpuCore : cpuCoreVec)
+    {
+        m_cpuCores << cpuCore;
+    }
+
     endInsertRows();
 }
 
-void CpuInfoDataModel::resetDataModel()
+void CpuInfoDataModel::updateDataInModel(const QVector<CpuCore>& cpuCoreVec)
 {
-    beginResetModel();
-    m_cpuCores.clear();
-    endResetModel();
+    auto columnIndex = 0;
+
+    for (const auto& cpuCore : cpuCoreVec)
+    {
+        m_cpuCores[columnIndex++] = cpuCore;
+    }
+
+    //Indicate that model's columns have been updated
+    emit dataChanged(index(0), index(columnIndex - 1));
+}
+
+void CpuInfoDataModel::addOrUpdateDataModel(const QVector<CpuCore>& cpuCoreVec)
+{
+    if (m_cpuCores.empty())
+    {
+        //Data model is empty, insert columns in the model
+        addDataToModel(cpuCoreVec);
+    }
+    else
+    {
+        //Data model already has all its items (columns)
+        //so its enough just update the model
+        updateDataInModel(cpuCoreVec);
+    }
 }
 
 int CpuInfoDataModel::rowCount(const QModelIndex & parent) const
@@ -85,8 +110,5 @@ void CpuInfoDataModel::addFileContentsToDataModel()
     CpuInfoFileReader cpuInfoFileReader(m_filename);
     QVector<CpuCore> cpuCoreVec = cpuInfoFileReader.readAndParse();
 
-    for (const auto& cpuCore : cpuCoreVec)
-    {
-        addToDataModel(cpuCore);
-    }
+    addOrUpdateDataModel(cpuCoreVec);
 }

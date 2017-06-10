@@ -39,16 +39,10 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
 
     /**
-     * @brief addToDataModel Adds data to model
-     * @param Constant reference to data to be added in model
+     * @brief addOrUpdateDataModel Adds or updates data items in the model
+     * @param cpuCoreVec Vector of data elements to be added or updated in the model
      */
-    void addToDataModel(const CpuCore &cpuCore);
-
-    /**
-     * @brief resetDataModel Resets data model.
-     * All data items in model are deleted.
-     */
-    void resetDataModel();
+    void addOrUpdateDataModel(const QVector<CpuCore>& cpuCoreVec);
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
@@ -58,6 +52,18 @@ private:
      * @brief addFileContentsToDataModel Adds file contents to data model
      */
     void addFileContentsToDataModel();
+
+    /**
+     * @brief addDataToModel Adds new data in the model
+     * @param cpuCoreVec Vector of data elemens to be added in model
+     */
+    void addDataToModel(const QVector<CpuCore>& cpuCoreVec);
+
+    /**
+     * @brief updateDataInModel Updates data in the model
+     * @param cpuCoreVec Vector of data elements to be updated in model
+     */
+    void updateDataInModel(const QVector<CpuCore>& cpuCoreVec);
 
     QList<CpuCore> m_cpuCores;
     QString m_filename;
