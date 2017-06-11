@@ -49,8 +49,31 @@ QVector<CpuCore> CpuInfoFileReader::readAndParse() const
 
             if (line.contains("cpu MHz"))
             {
-                cpuCore.clockFreqMhz = line.split(':').last();
-                cpuCore.clockFreqMhz.trimmed();
+                cpuCore.clockFreqMhz = line.split(':').last().trimmed();
+            }
+
+            if (line.contains("cache size"))
+            {
+                cpuCore.cacheSize = line.split(':').last().trimmed();
+            }
+
+            if (line.contains("flags"))
+            {
+                cpuCore.flags = line.split(':').last().trimmed();
+            }
+
+            if (line.contains("cpu family"))
+            {
+                cpuCore.cpuFamily = line.split(':').last().trimmed();
+            }
+
+            if (line.contains("bogomips"))
+            {
+                cpuCore.bogoMips = line.split(':').last().trimmed();
+            }
+
+            if (line.contains("power management"))
+            {
                 //This is last item we are interested in.
                 //Add cpuCore in the vector
                 cpuCoreVec.push_back(cpuCore);

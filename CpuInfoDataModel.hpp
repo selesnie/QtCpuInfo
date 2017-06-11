@@ -25,7 +25,11 @@ public:
         ProcessorIdRole = Qt::UserRole + 1,
         VendorRole,
         ModelNameRole,
-        ClockFreqRole
+        ClockFreqRole,
+        CacheSize,
+        Flags,
+        CpuFamily,
+        BogoMips
     };
 
     /**

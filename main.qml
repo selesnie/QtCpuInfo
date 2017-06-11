@@ -47,7 +47,7 @@ Window {
                     height: parent.height
                     anchors.leftMargin: 10
                     anchors.rightMargin: 20
-                    anchors.topMargin: 20
+                    anchors.topMargin: 50
                     anchors.bottomMargin: 20
 
                     style: CpuSpeedGaugeStyle {}
@@ -58,8 +58,14 @@ Window {
                     color: "white"
                     anchors.fill: parent
                     text: {
-                        var text = model + "\n" +
-                                "CPU " + processor;
+                        var text =
+                                "CPU: " + "#" + processor.trim() + "\n" +
+                                "Vendor: " + vendor.trim() + "\n" +
+                                "CPU Family: " + cpuFamily.trim() + "\n" +
+                                "Model: " + model.trim() + "\n" +
+                                "CPU MHz: " + clockFreqMhz.trim() + "\n" +
+                                "Cache size: " + cacheSize.trim() + "\n" +
+                                "BogoMips: " + bogoMips.trim();
                         return text;
                     }
                 }

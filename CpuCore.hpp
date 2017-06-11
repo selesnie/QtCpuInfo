@@ -15,6 +15,10 @@ struct CpuCore
     QString vendor {};
     QString model {};
     QString clockFreqMhz {};
+    QString cacheSize {};
+    QString flags {};
+    QString cpuFamily {};
+    QString bogoMips {};
 };
 
 #endif

@@ -88,6 +88,14 @@ QVariant CpuInfoDataModel::data(const QModelIndex & index, int role) const
         return cpuCore.model;
     case ClockFreqRole:
         return cpuCore.clockFreqMhz;
+    case CacheSize:
+        return cpuCore.cacheSize;
+    case Flags:
+        return cpuCore.flags;
+    case CpuFamily:
+        return cpuCore.cpuFamily;
+    case BogoMips:
+        return cpuCore.bogoMips;
     }
 
     return QVariant();
@@ -101,6 +109,10 @@ QHash<int, QByteArray> CpuInfoDataModel::roleNames() const
     roles[VendorRole] = "vendor";
     roles[ModelNameRole] = "model";
     roles[ClockFreqRole] = "clockFreqMhz";
+    roles[CacheSize] = "cacheSize";
+    roles[Flags] = "cpuFlags";
+    roles[CpuFamily] = "cpuFamily";
+    roles[BogoMips] = "bogoMips";
 
     return roles;
 }
